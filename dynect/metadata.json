@@ -1,0 +1,39 @@
+{
+  "recipes": {
+
+  },
+  "suggestions": {
+
+  },
+  "dependencies": {
+
+  },
+  "platforms": {
+
+  },
+  "maintainer_email": "lhagemann@dyn.com",
+  "conflicting": {
+
+  },
+  "description": "Installs/Configures dynect",
+  "providing": {
+
+  },
+  "name": "dynect",
+  "replacing": {
+
+  },
+  "version": "0.1.0",
+  "groupings": {
+
+  },
+  "attributes": {
+
+  },
+  "long_description": "= DESCRIPTION:\n\nThis cookbook provides resources and providers to configure and manage DNS and \nservices on the Dynect Platform.\n\nCurrently support resouces:\nLoad Balance ('load_balance')\n\n= REQUIREMENTS:\n\nRequires Chef 0.7.10 or higher for Lightweight Resource and Provider support. \nChef 0.8+ is recommended. \n\nAn Account on the Dynect Platform (dynect.com) is required\n\n= Dynect Platform Credentials\n\nIn order to manage your Dynect Platform account and services, authentication \ncredentials need to be available to the node. \n\nAn example of storing your credentials in a DataBag\n\t% knife data bag show dynect_api apicreds\n\t{\n\t  \"id\": \"apicreds\",\n\t  \"customer_name\": \"<your_customer_name>\",\n\t  \"password\": \"<your_password>\",\n\t  \"user_name\": \"<your_user_name>\"\n\t}\n\n= ATTRIBUTES: \n\n= USAGE:\n\n\n= Resources and Providers\n\nThis cookbook contains a provider for the Dynect Load Balance service and the\nassociated resource\n\n\nActions:\n* :get -- get the details of a single service or a list of resources for all services in a zone\n* :add_ip  -- Adds a single IP to the Load Balance Service\n* :remove_ip -- Removes a single IP from the Load Balance \n\nAttributes:\n* :customer_name, :user_name, :password -- passed to the Dynect Platform API, required\n* :zone -- the name of the zone, required\n* :fqdn -- the fully qualified domain name of the zone host where the specific service\nresides (required for 'add_ip' and 'remove_ip'\n* :ip -- The IP to add or removed, defaults the host IP of the chef client node\n",
+  "recommendations": {
+
+  },
+  "license": "Apache 2.0",
+  "maintainer": "Dyn Inc"
+}
