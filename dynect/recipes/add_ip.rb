@@ -18,17 +18,14 @@
 #
 
 creds = data_bag_item("dynect_api", "apicreds")
-hosts = data_bag_item("dynect_api", "api_hosts")
 
 dynect_load_balance "loadbal" do
 	customer_name creds['customer_name']
 	user_name     creds['user_name']
     password      creds['password']
 
-	uri hosts['lab']
-
 	zone 'apitest.com'
-    fqdn 'foo.apitest.com'
+	fqdn 'foo.apitest.com'
 
 	action :add_ip
 end
