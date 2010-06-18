@@ -64,8 +64,31 @@ def action_update_pool_entry
       @updated = true
     end
   else
-	  Chef::Log.debug("No GSLB Pool entry found to edit")
+	  Chef::Log.debug("No GSLB Pool entry found to edit, will create it")
+	  action_create_pool_entry
   end
+end
+
+def action_create_pool_entry
+	@new_entry = Hash.new(nil)
+	dyn_uri_resource = "GSLBRegionPoolEntry/#{@new_resource.zone}/#{@new_resource.fqdn}/"
+	region_code = @new_resource.region_code
+	region_code = region_code.sub(/\s/, '%20')  # poor woman's encoding
+	dyn_uri_resource << "#{region_code}/"
+
+	%w{ address label weight serve_mode }.each do |arg| 
+		puts "new value #{arg} is : ", @new_resource.send(arg.to_sym)
+		@new_entry["#{arg}"] = @new_resource.send(arg.to_sym) if @new_resource.send(arg.to_sym)
+		Chef::Log.info("Adding Regional Entry #{arg} value is: #{@new_entry["#{arg}"]}\n")
+	end
+
+	begin
+		@dyn.post(dyn_uri_resource, @new_entry)
+		Chef::Log.info("Added #{@new_entry} at dynect")
+        @updated = true
+    rescue DynectRest::Exceptions::RequestFailed => e
+		Chef::Log.debug("Cannot create entry")
+	end
 end
 
 def action_iterate

@@ -24,12 +24,12 @@ dynect_dns_gslb_region_pool node[:hostname] do
 	username node[:dynect][:username]
 	password node[:dynect][:password]
 	zone     node[:dynect][:zone]
-	fqdn "gslb.#{node[:dynect][:domain]}"
+	fqdn "reserve.#{node[:dynect][:domain]}"
 	
 	region_code 'US West'
-	address '165.250.13.14'
-	new_address '165.250.14.14'
-
+	address '184.72.54.44'
+	new_address '184.72.248.73'
+	label 'www-02-east' # update label to this
 	action :update_pool_entry
 
 end

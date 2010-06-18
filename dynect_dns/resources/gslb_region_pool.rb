@@ -16,7 +16,7 @@
 # limitations under the License.
 #
 
-actions :get, :update_pool_entry, :iterate
+actions :get, :update_pool_entry, :create_pool_entry, :iterate
 
 attribute :username, :kind_of => String
 attribute :password, :kind_of => String

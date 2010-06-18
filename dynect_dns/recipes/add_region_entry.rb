@@ -1,5 +1,5 @@
 # Cookbook Name:: dynect-dns
-# Recipe:: gslb
+# Recipe:: add_region_entry
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,18 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+#
 
 include_recipe 'dynect_dns'
 
-dynect_dns_gslb node[:hostname] do
+dynect_dns_gslb_region_pool node[:hostname] do
 	customer node[:dynect][:customer]
 	username node[:dynect][:username]
 	password node[:dynect][:password]
 	zone     node[:dynect][:zone]
 	fqdn "reserve.#{node[:dynect][:domain]}"
 	
-	ttl '30'
-	
-	action :update_ttl
+	region_code 'US East'
+	address '1.1.1.1'
+	label 'www-04-east'
+
+	action :create_pool_entry
 
 end

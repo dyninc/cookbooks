@@ -1,5 +1,5 @@
 # Cookbook Name:: dynect-dns
-# Recipe:: update_region_pool.rb
+# Recipe:: nom_to_degr_03
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,11 +21,12 @@ dynect_dns_gslb_region_pool node[:hostname] do
 	username node[:dynect][:username]
 	password node[:dynect][:password]
 	zone     node[:dynect][:zone]
-	fqdn "gslb.#{node[:dynect][:domain]}"
+	fqdn "reserve.#{node[:dynect][:domain]}"
 	
 	region_code 'US West'
-	address '165.250.13.15'
-	new_address '165.250.14.15'
+	address '184.72.54.237'
+	new_address '184.72.248.213'
+	label 'www-03-east'
 
 	action :update_pool_entry
 
